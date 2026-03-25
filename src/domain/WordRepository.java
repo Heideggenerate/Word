@@ -22,7 +22,7 @@ public class WordRepository {
         return wordCount.get(word);
     }
 
-    public Set<String> getKeys(String word) {
+    public Set<String> getKeys() {
         return wordCount.keySet();
     }
 

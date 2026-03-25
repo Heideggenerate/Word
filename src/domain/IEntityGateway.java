@@ -1,6 +1,6 @@
 package domain;
 
-public interface IEntityGetaway {
+public interface IEntityGateway {
 
     public String readLine();
 

@@ -25,9 +25,11 @@ public class WordsRepository implements IWordsRepository {
     private void countWordsInsert(String word, int prev, int cur) {
         if (countWords.get(cur) == null)
             countWords.put(cur, new ArrayList<>());
-        if (countWords.get(prev) != null &&
-                countWords.get(prev).isEmpty())
-            countWords.remove(prev);
+        if (countWords.get(prev) != null) {
+            countWords.get(prev).remove(word);
+            if (countWords.get(prev).isEmpty())
+                countWords.remove(prev);
+        }
         countWords.get(cur).add(word);
     }
 

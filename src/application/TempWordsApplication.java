@@ -1,15 +1,15 @@
 package application;
 
-import domain.IEntityGetaway;
+import domain.IEntityGateway;
+import domain.IWordsRepository;
 import domain.counter.IWordsApplication;
-import infrastructure.repositories.WordsRepository;
 
 public class TempWordsApplication implements IWordsApplication {
 
-    private final IEntityGetaway getaway;
-    private final WordsRepository repository;
+    private final IEntityGateway getaway;
+    private final IWordsRepository repository;
 
-    public TempWordsApplication(IEntityGetaway getaway, WordsRepository repository) {
+    public TempWordsApplication(IEntityGateway getaway, IWordsRepository repository) {
         this.getaway = getaway;
         this.repository = repository;
     }
@@ -20,7 +20,7 @@ public class TempWordsApplication implements IWordsApplication {
         while ((line = getaway.readLine()) != null) {
             String[] wordsWithCount = extractWordsWithCount(line);
             int count = Integer.parseInt(wordsWithCount[1]);
-            repository.insert(wordsWithCount[0], count, 0);
+
         }
     }
 

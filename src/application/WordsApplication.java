@@ -1,15 +1,15 @@
 package application;
 
-import domain.IEntityGetaway;
+import domain.IEntityGateway;
+import domain.IWordsRepository;
 import domain.counter.IWordsApplication;
-import infrastructure.repositories.WordsRepository;
 
 public class WordsApplication implements IWordsApplication {
 
-    private final IEntityGetaway getaway;
-    private final WordsRepository repository;
+    private final IEntityGateway getaway;
+    private final IWordsRepository repository;
 
-    public WordsApplication(IEntityGetaway getaway, WordsRepository repository) {
+    public WordsApplication(IEntityGateway getaway, IWordsRepository repository) {
         this.getaway = getaway;
         this.repository = repository;
     }
@@ -35,9 +35,6 @@ public class WordsApplication implements IWordsApplication {
 
     private int countWordsInsert(String word, int insideCount, int count) {
         int prevPos = insideCount - count;
-        if (repository.getWords(prevPos) != null) {
-            repository.getWords(prevPos).remove(word);
-        }
         return prevPos;
     }
 

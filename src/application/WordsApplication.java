@@ -1,18 +1,20 @@
 package application;
 
-import domain.EntityGetaway;
-import domain.WordRepository;
+import domain.IEntityGetaway;
+import domain.IWordsApplication;
+import domain.counter.WordRepository;
 
-public class WordsApplication {
+public class WordsApplication implements IWordsApplication {
 
-    private final EntityGetaway getaway;
+    private final IEntityGetaway getaway;
     private final WordRepository repository;
 
-    public WordsApplication(EntityGetaway getaway, WordRepository repository) {
+    public WordsApplication(IEntityGetaway getaway, WordRepository repository) {
         this.getaway = getaway;
         this.repository = repository;
     }
 
+    @Override
     public void fill() {
         String line;
         while ((line = getaway.readLine()) != null) {

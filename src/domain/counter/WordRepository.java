@@ -1,4 +1,4 @@
-package domain;
+package domain.counter;
 
 import java.util.*;
 
@@ -6,6 +6,13 @@ public class WordRepository {
 
     private final TreeMap<String, Integer> wordCount = new TreeMap<>();
     private final TreeMap<Integer, List<String>> countWords = new TreeMap<>(COMPARE_BY_SIZE);
+
+    public static Comparator<Integer> COMPARE_BY_SIZE = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2 - o1;
+        }
+    };
 
     public void insert(String word, int count) {
         wordCountInsert(word, count);
@@ -32,30 +39,21 @@ public class WordRepository {
         wordCount.put(word, sum + count);
     }
 
-    public void remove(String word) {
-        wordCount.remove(word);
-    }
 
-    public int getCount(String word) {
+     int getCount(String word) {
         return wordCount.get(word);
     }
 
-    public List<String> getWords(int count) {
+     List<String> getWords(int count) {
         return countWords.get(count);
     }
 
-    public Set<String> getWordsKeys() {
+     Set<String> getWordsKeys() {
         return wordCount.keySet();
     }
 
-    public Set<Integer> getCountKeys() {
+     Set<Integer> getCountKeys() {
         return countWords.keySet();
     }
 
-    public static Comparator<Integer> COMPARE_BY_SIZE = new Comparator<Integer>() {
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            return o2 - o1;
-        }
-    };
 }

@@ -2,14 +2,14 @@ package application;
 
 import domain.IEntityGetaway;
 import domain.counter.IWordsApplication;
-import domain.counter.WordRepository;
+import infrastructure.repositories.WordsRepository;
 
 public class WordsApplication implements IWordsApplication {
 
     private final IEntityGetaway getaway;
-    private final WordRepository repository;
+    private final WordsRepository repository;
 
-    public WordsApplication(IEntityGetaway getaway, WordRepository repository) {
+    public WordsApplication(IEntityGetaway getaway, WordsRepository repository) {
         this.getaway = getaway;
         this.repository = repository;
     }
@@ -19,9 +19,26 @@ public class WordsApplication implements IWordsApplication {
         String line;
         while ((line = getaway.readLine()) != null) {
             String[] words = extractWords(line);
-            for (String word : words)
-                repository.insert(word, 1);
+            for (String word : words) {
+                int insideCount = wordCountInsert(word, 1);
+                repository.insert(word, insideCount, countWordsInsert(word, insideCount, 1));
+            }
         }
+    }
+
+    public int wordCountInsert(String word, int count) {
+        int sum = 0;
+        if (repository.getCount(word) != null)
+            sum += repository.getCount(word);
+        return sum + count;
+    }
+
+    private int countWordsInsert(String word, int insideCount, int count) {
+        int prevPos = insideCount - count;
+        if (repository.getWords(prevPos) != null) {
+            repository.getWords(prevPos).remove(word);
+        }
+        return prevPos;
     }
 
     private String[] extractWords(String line) {

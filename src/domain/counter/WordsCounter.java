@@ -1,14 +1,16 @@
 package domain.counter;
 
+import infrastructure.repositories.WordsRepository;
+
 import java.util.List;
 import java.util.Set;
 
 public class WordsCounter {
 
-    private final WordRepository repository;
+    private final WordsRepository repository;
     private final IWordsApplication application;
 
-    public WordsCounter(WordRepository repository, IWordsApplication application) {
+    public WordsCounter(WordsRepository repository, IWordsApplication application) {
         this.repository = repository;
         this.application = application;
     }

@@ -4,6 +4,8 @@ import domain.IEntityGateway;
 import domain.IWordsRepository;
 import domain.counter.IWordsApplication;
 
+import java.util.List;
+
 public class WordsApplication implements IWordsApplication {
 
     private final IEntityGateway getaway;
@@ -16,8 +18,8 @@ public class WordsApplication implements IWordsApplication {
 
     @Override
     public void fill() {
-        String line;
-        while ((line = getaway.readLine()) != null) {
+        List<String> lines = getaway.readLines();
+        for (String line : lines) {
             String[] words = extractWords(line);
             for (String word : words) {
                 int insideCount = wordCountInsert(word, 1);

@@ -1,11 +1,12 @@
-package infrastructure;
+package infrastructure.sequencedaccess;
+
+import domain.InputGateway;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
 
-public class Writer implements AutoCloseable {
+public class Writer implements AutoCloseable, InputGateway {
 
     private final BufferedWriter writer;
 

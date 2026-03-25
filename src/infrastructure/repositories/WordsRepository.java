@@ -22,22 +22,6 @@ public class WordsRepository implements IWordsRepository {
     }
 
 
-    private void countWordsInsert(String word, int prev, int cur) {
-        if (countWords.get(cur) == null)
-            countWords.put(cur, new ArrayList<>());
-        if (countWords.get(prev) != null) {
-            countWords.get(prev).remove(word);
-            if (countWords.get(prev).isEmpty())
-                countWords.remove(prev);
-        }
-        countWords.get(cur).add(word);
-    }
-
-
-    private void wordCountInsert(String word, int count) {
-        wordCount.put(word, count);
-    }
-
     public void removeWord(int pos, String word) {
         countWords.get(pos).remove(word);
     }
@@ -62,4 +46,20 @@ public class WordsRepository implements IWordsRepository {
         return countWords.keySet();
     }
 
+
+    private void countWordsInsert(String word, int prev, int cur) {
+        if (countWords.get(cur) == null)
+            countWords.put(cur, new ArrayList<>());
+        if (countWords.get(prev) != null) {
+            countWords.get(prev).remove(word);
+            if (countWords.get(prev).isEmpty())
+                countWords.remove(prev);
+        }
+        countWords.get(cur).add(word);
+    }
+
+
+    private void wordCountInsert(String word, int count) {
+        wordCount.put(word, count);
+    }
 }

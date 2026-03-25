@@ -1,4 +1,4 @@
-package domain;
+package domain.counter;
 
 public interface IWordsApplication {
 

@@ -6,11 +6,16 @@ import java.util.Set;
 public class WordsCounter {
 
     private final WordRepository repository;
+    private final IWordsApplication application;
 
-    public WordsCounter(WordRepository repository) {
+    public WordsCounter(WordRepository repository, IWordsApplication application) {
         this.repository = repository;
+        this.application = application;
     }
 
+    public void fillWords() {
+        application.fill();
+    }
 
     public int getCount(String word) {
         return repository.getCount(word);

@@ -1,7 +1,7 @@
 package application;
 
 import domain.IEntityGetaway;
-import domain.IWordsApplication;
+import domain.counter.IWordsApplication;
 import domain.counter.WordRepository;
 
 public class WordsApplication implements IWordsApplication {

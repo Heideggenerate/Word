@@ -1,9 +1,14 @@
+package infrastructure;
+
+import domain.EntityGetaway;
+import org.w3c.dom.Entity;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Reader implements AutoCloseable, Getaway {
+public class Reader implements AutoCloseable, EntityGetaway {
 
     private final BufferedReader reader;
 

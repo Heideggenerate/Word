@@ -17,15 +17,17 @@ public class WordsApplication implements IWordsApplication {
     }
 
     @Override
-    public void fill() {
-        List<String> lines = getaway.readLines();
+    public boolean fill(int n) {
+        List<String> lines = getaway.readLines(n);
+        if (lines.isEmpty())
+            return false;
         for (String line : lines) {
             String[] words = extractWords(line);
             for (String word : words) {
-                int insideCount = wordCountInsert(word, 1);
-                repository.insert(word, insideCount, countWordsInsert(word, insideCount, 1));
+                repository.insert(word, wordCountInsert(word, 1));
             }
         }
+        return true;
     }
 
     public int wordCountInsert(String word, int count) {
@@ -35,10 +37,6 @@ public class WordsApplication implements IWordsApplication {
         return sum + count;
     }
 
-    private int countWordsInsert(String word, int insideCount, int count) {
-        int prevPos = insideCount - count;
-        return prevPos;
-    }
 
     private String[] extractWords(String line) {
         return line.split(" ");

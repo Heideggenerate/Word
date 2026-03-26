@@ -1,4 +1,4 @@
-package infrastructure.repositories;
+package infrastructure.adapters;
 
 import domain.IEntityGateway;
 import domain.InputGateway;
@@ -6,27 +6,25 @@ import entities.WordsCount;
 
 import java.util.*;
 
-public class FileWordsRepository {
+public class FileWordsAdapter {
 
     private final InputGateway input;
     private final IEntityGateway gateway;
 
-    public FileWordsRepository(InputGateway input, IEntityGateway gateway) {
+    public FileWordsAdapter(InputGateway input, IEntityGateway gateway) {
         this.input = input;
         this.gateway = gateway;
     }
 
 
-    public void insert(List<WordsCount> wordsCounts) {
-        for (WordsCount wordCount : wordsCounts) {
-            StringBuilder builder = new StringBuilder();
-            List<String> words = wordCount.words();
-            builder.append(wordCount.count());
-            for (String word : words) {
-                builder.append(" ").append(word);
-            }
-            input.write(builder.toString());
+    public void insert(WordsCount wordCount) {
+        StringBuilder builder = new StringBuilder();
+        List<String> words = wordCount.words();
+        builder.append(wordCount.count());
+        for (String word : words) {
+            builder.append(" ").append(word);
         }
+        input.write(builder.toString());
     }
 
     public List<WordsCount> getData() {

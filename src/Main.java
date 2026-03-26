@@ -1,7 +1,4 @@
-import application.WordsApplication;
 import entities.WordsCount;
-import infrastructure.repositories.FileWordsRepository;
-import infrastructure.repositories.WordsRepository;
 import infrastructure.sequencedaccess.*;
 
 void main() {
@@ -16,19 +13,15 @@ void main() {
     tempWords2.add("Boba");
     tempWords2.add("Test");
 
-    List<WordsCount> words = new ArrayList<>();
-    words.add(new WordsCount(5, tempWords));
-    words.add(new WordsCount(6, tempWords2));
+    List<WordsCount> wordss = new ArrayList<>();
+    wordss.add(new WordsCount(5, tempWords));
+    wordss.add(new WordsCount(6, tempWords2));
 
-    try (Reader reader = new Reader("D:/programming/Words/read.txt");
+    try (Reader reader = new Reader("D:/programming/Words/write.txt");
     Writer writer = new Writer("D:/programming/Words/write.txt")) {
-        FileWordsRepository repo = new FileWordsRepository(writer, reader);
-        repo.insert(words);
 
 
-        List<String> countWords = repo.getWords(5);
-        for (String countWord : countWords)
-            System.out.println(countWord);
+
     } catch (IOException ex) {
     }
 }

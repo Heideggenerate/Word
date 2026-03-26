@@ -16,9 +16,9 @@ public class WordsRepository implements IWordsRepository {
         }
     };
 
-    public void insert(String word, int count, int prev) {
+    public void insert(String word, int count) {
         wordCountInsert(word, count);
-        countWordsInsert(word, prev, count);
+        countWordsInsert(word, count);
     }
 
 
@@ -47,15 +47,16 @@ public class WordsRepository implements IWordsRepository {
     }
 
 
-    private void countWordsInsert(String word, int prev, int cur) {
-        if (countWords.get(cur) == null)
-            countWords.put(cur, new ArrayList<>());
+    private void countWordsInsert(String word, int count) {
+        int prev = wordCount.get(word) - count;
+        if (countWords.get(count) == null)
+            countWords.put(count, new ArrayList<>());
         if (countWords.get(prev) != null) {
             countWords.get(prev).remove(word);
             if (countWords.get(prev).isEmpty())
                 countWords.remove(prev);
         }
-        countWords.get(cur).add(word);
+        countWords.get(count).add(word);
     }
 
 

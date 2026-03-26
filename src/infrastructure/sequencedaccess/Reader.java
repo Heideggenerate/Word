@@ -19,11 +19,12 @@ public class Reader implements AutoCloseable, IEntityGateway {
     }
 
     @Override
-    public List<String> readLines() {
+    public List<String> readLines(int n) {
         try {
             String line;
             List<String> lines = new ArrayList<>();
-            while ((line = reader.readLine()) != null)
+            int count = 0;
+            while ((line = reader.readLine()) != null && count++ < n)
                 lines.add(line);
             return lines;
         } catch (IOException ex) {

@@ -2,5 +2,5 @@ package domain.counter;
 
 public interface IWordsApplication {
 
-    public void fill();
+    public boolean fill(int n);
 }

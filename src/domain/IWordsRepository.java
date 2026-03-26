@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface IWordsRepository {
 
-    public void insert(String word, int prev, int count);
+    public void insert(String word, int count);
 
     public Integer getCount(String word);
 

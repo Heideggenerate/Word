@@ -9,6 +9,7 @@ public class WordsRepository implements IWordsRepository {
     private final TreeMap<String, Integer> wordCount = new TreeMap<>();
     private final TreeMap<Integer, List<String>> countWords = new TreeMap<>(COMPARE_BY_SIZE);
 
+
     public static Comparator<Integer> COMPARE_BY_SIZE = new Comparator<Integer>() {
         @Override
         public int compare(Integer o1, Integer o2) {

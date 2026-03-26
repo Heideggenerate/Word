@@ -3,6 +3,7 @@ package application;
 import domain.IEntityGateway;
 import domain.IWordsRepository;
 import domain.counter.IWordsApplication;
+import domain.counter.WordsCounter;
 
 import java.util.List;
 
@@ -10,24 +11,24 @@ public class WordsApplication implements IWordsApplication {
 
     private final IEntityGateway getaway;
     private final IWordsRepository repository;
+    private final WordsCounter wordsCounter;
 
-    public WordsApplication(IEntityGateway getaway, IWordsRepository repository) {
+    public WordsApplication(IEntityGateway getaway, IWordsRepository repository, WordsCounter wordsCounter) {
         this.getaway = getaway;
         this.repository = repository;
+        this.wordsCounter = wordsCounter;
     }
 
     @Override
-    public boolean fill(int n) {
+    public void fill(int n) {
         List<String> lines = getaway.readLines(n);
-        if (lines.isEmpty())
-            return false;
         for (String line : lines) {
-            String[] words = extractWords(line);
+            List<String> words = wordsCounter.correctWords(getWords(line));
             for (String word : words) {
                 repository.insert(word, wordCountInsert(word, 1));
             }
         }
-        return true;
+
     }
 
     public int wordCountInsert(String word, int count) {
@@ -37,8 +38,7 @@ public class WordsApplication implements IWordsApplication {
         return sum + count;
     }
 
-
-    private String[] extractWords(String line) {
+    public String[] getWords(String line) {
         return line.split(" ");
     }
 }

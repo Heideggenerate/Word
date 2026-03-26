@@ -27,9 +27,9 @@ public class FileWordsAdapter {
         input.write(builder.toString());
     }
 
-    public List<WordsCount> getData() {
+    public List<WordsCount> getData(int n) {
         List<WordsCount> words = new ArrayList<>();
-        List<String> lines = gateway.readLines();
+        List<String> lines = gateway.readLines(n);
         for (String line : lines) {
             int endPos = line.indexOf(" ");
             int count = Integer.parseInt(line.substring(0, endPos));

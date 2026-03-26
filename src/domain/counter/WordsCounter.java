@@ -1,38 +1,22 @@
 package domain.counter;
 
-import domain.IWordsRepository;
-import infrastructure.repositories.WordsRepository;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class WordsCounter {
 
-    private final IWordsRepository repository;
-    private final IWordsApplication application;
-
-    public WordsCounter(IWordsRepository repository, IWordsApplication application) {
-        this.repository = repository;
-        this.application = application;
+    public List<String> correctWords(String[] words) {
+        List<String> correctWords = new ArrayList<>(words.length);
+        for (String word : words) {
+            char lastCh = word.charAt(word.length() - 1);
+            if (lastCh == ' ' || lastCh == ',' || lastCh == '.') {
+                if (word.length() == 1)
+                    continue;
+                word = word.substring(0, word.length() - 1);
+            }
+            correctWords.add(word);
+        }
+        return correctWords;
     }
 
-    public void fillWords() {
-        application.fill();
-    }
-
-    public int getCount(String word) {
-        return repository.getCount(word);
-    }
-
-    public List<String> getWords(int count) {
-        return repository.getWords(count);
-    }
-
-    public Set<String> getWordsKeys() {
-        return repository.getWordsKeys();
-    }
-
-    public Set<Integer> getCountKeys() {
-        return repository.getCountKeys();
-    }
 }

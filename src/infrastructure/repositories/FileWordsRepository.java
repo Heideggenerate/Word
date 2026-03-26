@@ -25,29 +25,21 @@ public class FileWordsRepository {
             for (String word : words) {
                 builder.append(" ").append(word);
             }
+            input.write(builder.toString());
         }
     }
 
-    public Set<Integer> getCountKeys() {
-        Set<Integer> keys = new HashSet<>();
+    public List<WordsCount> getData() {
+        List<WordsCount> words = new ArrayList<>();
         List<String> lines = gateway.readLines();
         for (String line : lines) {
-            keys.add(Integer.parseInt(line.substring(0, line.indexOf(" "))));
-        }
-        gateway.reset();
-        return keys;
-    }
-
-    public List<String> getWords(int count) {
-        List<String> lines = gateway.readLines();
-        List<String> words = null;
-        for (String line : lines) {
-            int countEndPos = line.indexOf(" ");
-            if (Integer.parseInt(line.substring(0, countEndPos)) == count)
-                words = Arrays.asList(line.substring(countEndPos + 1).split(" "));
+            int endPos = line.indexOf(" ");
+            int count = Integer.parseInt(line.substring(0, endPos));
+            words.add(new WordsCount(count, Arrays.asList(line.substring(endPos + 1).split(" "))));
         }
         return words;
     }
+
 
 
 

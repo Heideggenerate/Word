@@ -11,12 +11,13 @@ public class Writer implements AutoCloseable, InputGateway {
     private final BufferedWriter writer;
 
     public Writer(String path) throws IOException {
-        this.writer = new BufferedWriter(new FileWriter(path));
+        this.writer = new BufferedWriter(new FileWriter(path, false));
     }
 
     public void write(String line) {
         try {
             writer.write(line);
+            writer.newLine();
         } catch (IOException ex) {
             throw new RuntimeException("Ошибка записи строки", ex);
         }
